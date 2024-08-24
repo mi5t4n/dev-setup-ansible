@@ -5,4 +5,5 @@
       - htop
       - curl
       - wget
+      - gpg
     state: latest
