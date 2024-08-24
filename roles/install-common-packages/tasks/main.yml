@@ -1,0 +1,8 @@
+- name: Install common packages
+  tags: common,ubuntu
+  apt:
+    name:
+      - htop
+      - curl
+      - wget
+    state: latest
