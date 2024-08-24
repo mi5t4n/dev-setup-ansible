@@ -12,3 +12,4 @@
   become: true
   roles:
     - install-common-packages
+    - install-chrome
