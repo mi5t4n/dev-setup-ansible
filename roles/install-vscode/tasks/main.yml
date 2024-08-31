@@ -1,23 +1,19 @@
-- name: Install VSCode signing key.
+- name: Add VSCode APT repository
   tags: vscode, ubuntu
-  apt_key:
-    url: https://packages.microsoft.com/keys/microsoft.asc
+  ansible.builtin.deb822_repository:
+    name: vscode
+    types: [deb]
+    uris: "https://packages.microsoft.com/repos/code"
+    signed_by: "https://packages.microsoft.com/keys/microsoft.asc"
+    suites: [stable]
+    components: [main]
     state: present
-
-- name: Install VSCode source list.
-  tags: vscode, ubuntu
-  apt_repository:
-    repo: "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-    filename: "vscode"
-    state: present
-    update_cache: yes
+    enabled: yes
 
 - name: Install the vscode package
   tags: vscode, ubuntu
-  apt:
-    name:
-      - apt-transport-https
-      - code
+  ansible.builtin.apt:
+    name: code
     state: latest
     update_cache: yes
     force_apt_get: yes
