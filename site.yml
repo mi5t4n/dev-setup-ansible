@@ -14,3 +14,4 @@
     - install-common-packages
     - install-chrome
     - install-vscode
+    - slack
