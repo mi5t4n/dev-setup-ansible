@@ -6,12 +6,15 @@
   - name: Update repository index
     apt:
       update_cache: yes
+      upgrade: yes
     changed_when: false
 
 - hosts: all
   become: true
   roles:
     - install-common-packages
-    - install-chrome
-    - install-vscode
-    - slack
+    # - install-chrome
+    # - install-vscode
+    # - slack
+    # - insomnia
+    - docker

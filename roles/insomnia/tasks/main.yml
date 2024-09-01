@@ -1,0 +1,28 @@
+- name: Install apt tools.
+  apt:
+    name:
+      - debian-keyring
+      - debian-archive-keyring
+      - apt-transport-https
+    state: present
+    update_cache: yes
+    force_apt_get: yes
+
+- name: Install Insomnia signing key.
+  tags: insomnia, ubuntu
+  ansible.builtin.deb822_repository:
+    name: insomnia
+    types: [deb]
+    signed_by: https://packages.konghq.com/public/insomnia/gpg.474B9148D779222B.key
+    uris: "https://packages.konghq.com/public/insomnia/config.deb.txt?distro={{ ansible_facts['distribution'] }}&codename={{ ansible_facts['distribution_codename'] }}&component=main"
+    suites: [stable]
+    components: [main]
+    state: present
+    enabled: yes
+
+- name: Install Insomnia.
+  ansible.builtin.apt:
+    name: insomnia
+    state: present
+    update_cache: yes
+    force_apt_get: yes
